@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -14,6 +15,7 @@ const macProducts = [
     imageSrc: "/images/macbook-neo-welcome.jpg",
     colors: ["#c0c0c0", "#ffd700", "#ffb6c1", "#87ceeb"],
     href: "/mac",
+    category: "laptop",
   },
   {
     name: "MacBook Air",
@@ -22,6 +24,7 @@ const macProducts = [
     imageSrc: "/images/macbook-air-hero.png",
     colors: ["#c0c0c0", "#1e3a5f", "#d4a5a5", "#2d5a27"],
     href: "/mac",
+    category: "laptop",
   },
   {
     name: "MacBook Pro",
@@ -30,6 +33,7 @@ const macProducts = [
     imageSrc: "/images/macbook-pro-hero.jpg",
     colors: ["#c0c0c0", "#333333"],
     href: "/mac",
+    category: "laptop",
   },
   {
     name: "iMac",
@@ -37,6 +41,7 @@ const macProducts = [
     imageSrc: "/images/imac-welcome.jpg",
     colors: ["#c0c0c0", "#e8a0bf", "#a0c4ff", "#b4f0b4", "#ffd700", "#ff6b6b", "#c9b1ff"],
     href: "/mac",
+    category: "desktop",
   },
   {
     name: "Mac mini",
@@ -44,6 +49,7 @@ const macProducts = [
     imageSrc: "/images/mac-mini-hero.png",
     colors: ["#c0c0c0", "#333333"],
     href: "/mac",
+    category: "desktop",
   },
   {
     name: "Mac Studio",
@@ -51,6 +57,7 @@ const macProducts = [
     imageSrc: "/images/mac-studio-hero.jpg",
     colors: ["#c0c0c0", "#333333"],
     href: "/mac",
+    category: "desktop",
   },
   {
     name: "Studio Display",
@@ -59,6 +66,7 @@ const macProducts = [
     imageSrc: "/images/studio-display-hero.jpg",
     colors: ["#c0c0c0", "#333333"],
     href: "/mac",
+    category: "display",
   },
   {
     name: "Studio Display XDR",
@@ -67,6 +75,7 @@ const macProducts = [
     imageSrc: "/images/buy-studio-display-xdr.png",
     colors: ["#c0c0c0", "#333333"],
     href: "/mac",
+    category: "display",
   },
 ];
 
@@ -95,7 +104,21 @@ const ecosystem = [
   },
 ];
 
+const filterTabs = [
+  { label: "All products", value: "all" },
+  { label: "Laptops", value: "laptop" },
+  { label: "Desktops", value: "desktop" },
+  { label: "Displays", value: "display" },
+];
+
 export default function MacPage() {
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filteredProducts =
+    activeFilter === "all"
+      ? macProducts
+      : macProducts.filter((p) => p.category === activeFilter);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -110,10 +133,19 @@ export default function MacPage() {
               Explore the lineup.
             </p>
             <div className="flex gap-4 justify-center mt-6 text-sm">
-              <span className="text-neutral-900 font-semibold border-b-2 border-neutral-900 pb-0.5">All products</span>
-              <span className="text-neutral-600 hover:text-neutral-900 cursor-pointer transition-colors">Laptops</span>
-              <span className="text-neutral-600 hover:text-neutral-900 cursor-pointer transition-colors">Desktops</span>
-              <span className="text-neutral-600 hover:text-neutral-900 cursor-pointer transition-colors">Displays</span>
+              {filterTabs.map((tab) => (
+                <button
+                  key={tab.value}
+                  onClick={() => setActiveFilter(tab.value)}
+                  className={`transition-colors pb-0.5 ${
+                    activeFilter === tab.value
+                      ? "text-neutral-900 font-semibold border-b-2 border-neutral-900"
+                      : "text-neutral-600 hover:text-neutral-900"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
           </ScrollReveal>
         </section>
@@ -122,7 +154,7 @@ export default function MacPage() {
         <section className="bg-neutral-100 py-3">
           <ScrollReveal className="max-w-[980px] mx-auto px-3" stagger>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {macProducts.map((product) => (
+              {filteredProducts.map((product) => (
                 <div
                   key={product.name}
                   className="group relative bg-white rounded-2xl overflow-hidden flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300"
