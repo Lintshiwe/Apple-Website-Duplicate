@@ -104,7 +104,7 @@ export default function IphonePage() {
                         src={product.imageSrc}
                         alt={product.name}
                         fill
-                        className="!relative object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="!relative object-contain group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
