@@ -196,14 +196,14 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden md:flex items-center">
             {navData.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onMouseEnter={() => handleNavEnter(item.label)}
                 onMouseLeave={handleNavLeave}
-                className={`text-xs transition-colors no-underline ${
+                className={`text-xs transition-colors no-underline pr-7 ${
                   activeDropdown === item.label
                     ? "text-black"
                     : "text-neutral-600 hover:text-neutral-900"
