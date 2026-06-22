@@ -203,7 +203,7 @@ export default function Navbar() {
                 href={item.href}
                 onMouseEnter={() => handleNavEnter(item.label)}
                 onMouseLeave={handleNavLeave}
-                className={`text-xs transition-colors no-underline pr-28 ${
+                className={`text-xs transition-colors no-underline pr-[100px] ${
                   activeDropdown === item.label
                     ? "text-black"
                     : "text-neutral-600 hover:text-neutral-900"
