@@ -31,23 +31,25 @@ const watchProducts = [
 ];
 
 const features = [
-  { title: "Health", subtitle: "Knows you. Insights and out." },
-  { title: "Fitness", subtitle: "Miles of motivation." },
-  { title: "Safety", subtitle: "Keep help close at hand." },
-  { title: "Apple Watch Ultra 3", subtitle: "The ultimate sports and adventure watch." },
-  { title: "Connectivity", subtitle: "The right call for staying in touch." },
-  { title: "Personalisation", subtitle: "Make it you-nique." },
-  { title: "Apple Watch + iPhone", subtitle: "Dynamic duo." },
+  { title: "Health", subtitle: "Knows you. Insights and out.", image: "/images/features/watch-health.jpg" },
+  { title: "Fitness", subtitle: "Miles of motivation.", image: "/images/features/watch-fitness.jpg" },
+  { title: "Safety", subtitle: "Keep help close at hand.", image: "/images/features/watch-safety.jpg" },
+  { title: "Apple Watch Ultra 3", subtitle: "The ultimate sports and adventure watch.", image: "/images/features/watch-adventure.jpg" },
+  { title: "Connectivity", subtitle: "The right call for staying in touch.", image: "/images/features/watch-connectivity.jpg" },
+  { title: "Personalisation", subtitle: "Make it you-nique.", image: "/images/features/watch-personalization.jpg" },
+  { title: "Apple Watch + iPhone", subtitle: "Dynamic duo.", image: "/images/features/watch-watch-iphone.jpg" },
 ];
 
 const ecosystem = [
   {
     title: "Apple Watch and iPhone",
     description: "Combining Apple Watch and iPhone opens up a world of features that make each device better. You can do things like start a cycling workout on your watch and see your metrics automatically appear as a Live Activity on your iPhone.",
+    image: "/images/ecosystem/watch-iphone.jpg",
   },
   {
     title: "Apple Watch and AirPods",
     description: "You can do so much with just Apple Watch and AirPods — all without your iPhone. Take calls, stream music and podcasts, hear incoming notifications. Even respond to messages with Siri.",
+    image: "/images/ecosystem/watch-airpods.jpg",
   },
 ];
 
@@ -85,7 +87,7 @@ export default function WatchPage() {
                         src={product.imageSrc}
                         alt={product.name}
                         fill
-                        className="!relative object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="!relative object-contain group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     ) : (
@@ -129,11 +131,20 @@ export default function WatchPage() {
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className="snap-center shrink-0 w-64 h-40 rounded-xl flex flex-col justify-end p-5 text-white"
-                  style={{ background: "linear-gradient(135deg, #1a1a2e, #16213e)" }}
+                  className="snap-center shrink-0 w-72 h-80 rounded-xl overflow-hidden relative group cursor-pointer"
                 >
-                  <h3 className="text-lg font-semibold">{feature.title}</h3>
-                  <p className="text-sm opacity-80 mt-1">{feature.subtitle}</p>
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="288px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                    <h3 className="text-lg font-semibold">{feature.title}</h3>
+                    <p className="text-sm opacity-80 mt-1">{feature.subtitle}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -148,9 +159,20 @@ export default function WatchPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {ecosystem.map((item) => (
-                <div key={item.title}>
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">{item.title}</h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{item.description}</p>
+                <div key={item.title} className="bg-white rounded-2xl overflow-hidden">
+                  <div className="relative h-48">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-neutral-900 mb-3">{item.title}</h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">{item.description}</p>
+                  </div>
                 </div>
               ))}
             </div>

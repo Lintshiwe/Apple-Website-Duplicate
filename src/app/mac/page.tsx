@@ -80,27 +80,29 @@ const macProducts = [
 ];
 
 const features = [
-  { title: "Performance and Battery Life", subtitle: "Go fast. Go far." },
-  { title: "Built for AI", subtitle: "Smart. Secure. On device." },
-  { title: "Mac + iPhone", subtitle: "Together they work wonders." },
-  { title: "Compatibility", subtitle: "Mac runs your favourite apps." },
-  { title: "Privacy and Security", subtitle: "Your business is nobody else's." },
-  { title: "Durability", subtitle: "Built to stand the test of time." },
-  { title: "Apple Values", subtitle: "Our values drive everything we do." },
+  { title: "Performance and Battery Life", subtitle: "Go fast. Go far.", image: "/images/features/mac-performance.jpg" },
+  { title: "Built for AI", subtitle: "Smart. Secure. On device.", image: "/images/features/mac-intelligence.jpg" },
+  { title: "Compatibility", subtitle: "Mac runs your favourite apps.", image: "/images/features/mac-compatibility.jpg" },
+  { title: "Privacy and Security", subtitle: "Your business is nobody else's.", image: "/images/features/mac-security.jpg" },
+  { title: "Durability", subtitle: "Built to stand the test of time.", image: "/images/features/mac-durability.jpg" },
+  { title: "Apple Values", subtitle: "Our values drive everything we do.", image: "/images/features/mac-values.jpg" },
 ];
 
 const ecosystem = [
   {
     title: "Mac and iPhone",
-    description: "Answer calls or messages from your iPhone directly on your Mac. Use Universal Clipboard to copy images, video or text from your iPhone, then paste into another app on your nearby Mac. And thanks to iCloud, you can access your files from either your iPhone or your Mac.",
+    description: "Answer calls or messages from your iPhone directly on your Mac. Use Universal Clipboard to copy images, video or text from your iPhone, then paste into another app on your nearby Mac.",
+    image: "/images/ecosystem/mac-iphone.jpg",
   },
   {
     title: "Mac and iPad",
-    description: "Sketch on your iPad and have it appear instantly on your Mac. Or use your iPad as a second display, so you can work on one screen while you reference the other. You can even start something on your iPad and continue it on your Mac.",
+    description: "Sketch on your iPad and have it appear instantly on your Mac. Or use your iPad as a second display, so you can work on one screen while you reference the other.",
+    image: "/images/ecosystem/mac-ipad.jpg",
   },
   {
     title: "Mac and Apple Watch",
     description: "Automatically log in to your Mac when you're wearing your Apple Watch with Auto Unlock. No password typing required.",
+    image: "/images/ecosystem/mac-watch.jpg",
   },
 ];
 
@@ -172,7 +174,7 @@ export default function MacPage() {
                         src={product.imageSrc}
                         alt={product.name}
                         fill
-                        className="!relative object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="!relative object-contain group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
@@ -216,11 +218,20 @@ export default function MacPage() {
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className="snap-center shrink-0 w-64 h-40 rounded-xl flex flex-col justify-end p-5 text-white"
-                  style={{ background: "linear-gradient(135deg, #1a1a2e, #16213e)" }}
+                  className="snap-center shrink-0 w-72 h-80 rounded-xl overflow-hidden relative group cursor-pointer"
                 >
-                  <h3 className="text-lg font-semibold">{feature.title}</h3>
-                  <p className="text-sm opacity-80 mt-1">{feature.subtitle}</p>
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="288px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                    <h3 className="text-lg font-semibold">{feature.title}</h3>
+                    <p className="text-sm opacity-80 mt-1">{feature.subtitle}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -235,9 +246,20 @@ export default function MacPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {ecosystem.map((item) => (
-                <div key={item.title}>
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">{item.title}</h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{item.description}</p>
+                <div key={item.title} className="bg-white rounded-2xl overflow-hidden">
+                  <div className="relative h-48">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-neutral-900 mb-3">{item.title}</h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">{item.description}</p>
+                  </div>
                 </div>
               ))}
             </div>

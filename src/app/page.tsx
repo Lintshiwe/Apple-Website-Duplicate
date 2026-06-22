@@ -87,7 +87,7 @@ export default function Home() {
                       src={card.imageSrc}
                       alt={card.name}
                       fill
-                      className="!relative object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                      className="!relative object-contain group-hover:scale-[1.03] transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>

@@ -46,22 +46,24 @@ const iphoneProducts = [
 ];
 
 const features = [
-  { title: "Innovation", subtitle: "Beautiful and durable, by design." },
-  { title: "Cutting-Edge Cameras", subtitle: "Picture your best photos and videos." },
-  { title: "Chip and Battery Life", subtitle: "Fast that lasts." },
-  { title: "iOS and Apple Intelligence", subtitle: "New look. Even more magic." },
-  { title: "Environment", subtitle: "Designed with the earth in mind." },
-  { title: "Privacy", subtitle: "Your data. Just where you want it." },
+  { title: "Innovation", subtitle: "Beautiful and durable, by design.", image: "/images/features/iphone-innovation.jpg" },
+  { title: "Cutting-Edge Cameras", subtitle: "Picture your best photos and videos.", image: "/images/features/iphone-camera.jpg" },
+  { title: "Chip and Battery Life", subtitle: "Fast that lasts.", image: "/images/features/iphone-chip.jpg" },
+  { title: "iOS and Apple Intelligence", subtitle: "New look. Even more magic.", image: "/images/features/iphone-ios.jpg" },
+  { title: "Environment", subtitle: "Designed with the earth in mind.", image: "/images/features/iphone-environment.jpg" },
+  { title: "Privacy", subtitle: "Your data. Just where you want it.", image: "/images/features/iphone-privacy.jpg" },
 ];
 
 const ecosystem = [
   {
     title: "iPhone and Mac",
     description: "You can copy images, video or text from your iPhone and paste it into a different app on your Mac, as well as answer calls or messages from your iPhone. And with iCloud, you can access your favourite files from either your iPhone or Mac.",
+    image: "/images/ecosystem/iphone-mac.jpg",
   },
   {
     title: "iPhone and Apple Watch",
     description: "Misplaced your iPhone? The latest Apple Watch models can show you its approximate distance and direction. To set up a group photo on your iPhone, join the group and use Apple Watch as a viewfinder to snap the shot.",
+    image: "/images/ecosystem/iphone-watch.jpg",
   },
 ];
 
@@ -127,9 +129,10 @@ export default function IphonePage() {
                       </div>
                     )}
                     <p className="text-sm text-neutral-600 mb-3">{product.tagline}</p>
-                    <span className="text-sm text-[#06c] hover:underline">
-                      Learn more &gt;
-                    </span>
+                    <div className="flex items-center justify-center gap-4">
+                      <Link href="/iphone" className="text-sm text-[#06c] hover:underline">Learn more</Link>
+                      <Link href="/where-to-buy" className="text-sm text-[#06c] hover:underline">Find a Store</Link>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -147,11 +150,20 @@ export default function IphonePage() {
               {features.map((feature) => (
                 <div
                   key={feature.title}
-                  className="snap-center shrink-0 w-64 h-40 rounded-xl flex flex-col justify-end p-5 text-white"
-                  style={{ background: "linear-gradient(135deg, #1a1a2e, #16213e)" }}
+                  className="snap-center shrink-0 w-72 h-80 rounded-xl overflow-hidden relative group cursor-pointer"
                 >
-                  <h3 className="text-lg font-semibold">{feature.title}</h3>
-                  <p className="text-sm opacity-80 mt-1">{feature.subtitle}</p>
+                  <Image
+                    src={feature.image}
+                    alt={feature.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="288px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                    <h3 className="text-lg font-semibold">{feature.title}</h3>
+                    <p className="text-sm opacity-80 mt-1">{feature.subtitle}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -164,11 +176,22 @@ export default function IphonePage() {
             <h2 className="text-3xl md:text-4xl font-semibold text-center text-neutral-900 mb-12">
               Significant others.
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {ecosystem.map((item) => (
-                <div key={item.title}>
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">{item.title}</h3>
-                  <p className="text-sm text-neutral-600 leading-relaxed">{item.description}</p>
+                <div key={item.title} className="bg-white rounded-2xl overflow-hidden">
+                  <div className="relative h-48">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-neutral-900 mb-3">{item.title}</h3>
+                    <p className="text-sm text-neutral-600 leading-relaxed">{item.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
