@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -230,7 +231,22 @@ const watchProducts = [
   },
 ];
 
-function ProductList({ products }: { products: { name: string; chip?: string; colors: { name: string; hex: string }[]; description: string; imageSrc?: string }[] }) {
+const tabs = [
+  { id: "mac", label: "Mac", iconDark: "/images/tab-mac-dark.png", iconWhite: "/images/tab-mac-white.png" },
+  { id: "ipad", label: "iPad", iconDark: "/images/tab-ipad-dark.png", iconWhite: "/images/tab-ipad-white.png" },
+  { id: "iphone", label: "iPhone", iconDark: "/images/tab-iphone-dark.png", iconWhite: "/images/tab-iphone-white.png" },
+  { id: "watch", label: "Watch", iconDark: "/images/tab-watch-dark.png", iconWhite: "/images/tab-watch-white.png" },
+];
+
+type Product = {
+  name: string;
+  chip?: string;
+  colors: { name: string; hex: string }[];
+  description: string;
+  imageSrc?: string;
+};
+
+function ProductList({ products }: { products: Product[] }) {
   return (
     <div className="space-y-6">
       {products.map((product) => (
@@ -265,6 +281,37 @@ function ProductList({ products }: { products: { name: string; chip?: string; co
 }
 
 export default function WhereToBuyPage() {
+  const [activeTab, setActiveTab] = useState("mac");
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+
+  const setSectionRef = useCallback((id: string) => (el: HTMLElement | null) => {
+    sectionRefs.current[id] = el;
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("data-tab-id");
+            if (id) setActiveTab(id);
+          }
+        }
+      },
+      { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+    );
+
+    const sections = Object.values(sectionRefs.current).filter(Boolean) as HTMLElement[];
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    setActiveTab(id);
+    sectionRefs.current[id]?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -278,30 +325,51 @@ export default function WhereToBuyPage() {
           </ScrollReveal>
         </section>
 
-        {/* Category Tabs */}
-        <section className="bg-white border-b border-neutral-200">
-          <div className="max-w-[980px] mx-auto px-6">
-            <nav className="flex gap-1 py-3 overflow-x-auto" aria-label="Product categories">
-              {[
-                { label: "Mac", href: "#mac" },
-                { label: "iPad", href: "#ipad" },
-                { label: "iPhone", href: "#iphone" },
-                { label: "Watch", href: "#watch" },
-              ].map((tab) => (
-                <a
-                  key={tab.label}
-                  href={tab.href}
-                  className="px-5 py-2 rounded-full text-sm font-medium text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 transition-colors shrink-0"
-                >
-                  {tab.label}
-                </a>
-              ))}
+        {/* Apple-style pill tab navigation with icons */}
+        <section className="bg-white border-b border-neutral-200 sticky top-11 z-30">
+          <div className="max-w-[980px] mx-auto px-6 py-4">
+            <nav className="flex justify-center" aria-label="Product categories">
+              {/* Pill container */}
+              <div className="inline-flex items-center gap-1 bg-neutral-100 rounded-full p-1">
+                {tabs.map((tab) => {
+                  const isActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => scrollToSection(tab.id)}
+                      className={`flex flex-col items-center gap-0.5 px-5 py-2 rounded-full transition-all duration-200 ${
+                        isActive
+                          ? "bg-neutral-900 text-white"
+                          : "text-neutral-600 hover:text-neutral-900"
+                      }`}
+                      role="tab"
+                      aria-selected={isActive}
+                    >
+                      <div className="w-8 h-[26px] flex items-center justify-center">
+                        <Image
+                          src={isActive ? tab.iconWhite : tab.iconDark}
+                          alt={`${tab.label} icon`}
+                          width={32}
+                          height={26}
+                          className="object-contain"
+                        />
+                      </div>
+                      <span className="text-xs font-medium">{tab.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </nav>
           </div>
         </section>
 
         {/* Mac Availability */}
-        <section id="mac" className="bg-white py-16 md:py-24 scroll-mt-12">
+        <section
+          id="mac"
+          data-tab-id="mac"
+          ref={setSectionRef("mac")}
+          className="bg-white py-16 md:py-24 scroll-mt-28"
+        >
           <ScrollReveal className="max-w-[980px] mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-2">
               Mac availability in South Africa
@@ -314,7 +382,12 @@ export default function WhereToBuyPage() {
         </section>
 
         {/* iPad Availability */}
-        <section id="ipad" className="bg-neutral-100 py-16 md:py-24 scroll-mt-12">
+        <section
+          id="ipad"
+          data-tab-id="ipad"
+          ref={setSectionRef("ipad")}
+          className="bg-neutral-100 py-16 md:py-24 scroll-mt-28"
+        >
           <ScrollReveal className="max-w-[980px] mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-2">
               iPad availability in South Africa
@@ -327,7 +400,12 @@ export default function WhereToBuyPage() {
         </section>
 
         {/* iPhone Availability */}
-        <section id="iphone" className="bg-white py-16 md:py-24 scroll-mt-12">
+        <section
+          id="iphone"
+          data-tab-id="iphone"
+          ref={setSectionRef("iphone")}
+          className="bg-white py-16 md:py-24 scroll-mt-28"
+        >
           <ScrollReveal className="max-w-[980px] mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-2">
               iPhone availability in South Africa
@@ -340,7 +418,12 @@ export default function WhereToBuyPage() {
         </section>
 
         {/* Apple Watch Availability */}
-        <section id="watch" className="bg-neutral-100 py-16 md:py-24 scroll-mt-12">
+        <section
+          id="watch"
+          data-tab-id="watch"
+          ref={setSectionRef("watch")}
+          className="bg-neutral-100 py-16 md:py-24 scroll-mt-28"
+        >
           <ScrollReveal className="max-w-[980px] mx-auto px-6">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-2">
               Apple Watch availability in South Africa
