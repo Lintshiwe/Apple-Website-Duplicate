@@ -187,7 +187,7 @@ export default function Navbar() {
           backdropFilter: "saturate(180%) blur(20px)",
         } as React.CSSProperties}
       >
-        <div className="flex items-center h-12 px-6">
+        <div className="flex items-center justify-center h-12 px-6">
           {/* Apple logo */}
           <Link href="/" className="text-neutral-900 hover:text-neutral-500 transition-colors mr-32">
             <svg width="14" height="44" viewBox="0 0 14 44" fill="currentColor">
