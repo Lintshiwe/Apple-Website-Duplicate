@@ -187,47 +187,72 @@ export default function Navbar() {
           backdropFilter: "saturate(180%) blur(20px)",
         } as React.CSSProperties}
       >
-        <div className="max-w-screen-xl mx-auto flex items-center justify-between h-12 px-6">
-          {/* Apple logo */}
-          <Link href="/" className="text-neutral-900 hover:text-neutral-500 transition-colors">
-            <svg width="14" height="44" viewBox="0 0 14 44" fill="currentColor">
-              <path d="m13.0729 17.6825a3.61 3.61 0 0 0 -1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1 -1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1 -1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.6919 2.5924.6919.63 0 1.6112-.7333 2.8092-.7333a3.7579 3.7579 0 0 1 3.1604 1.5802zm-3.7284-2.8918a3.5615 3.5615 0 0 0 .8469-2.22 1.5353 1.5353 0 0 0 -.031-.32 3.5686 3.5686 0 0 0 -2.3445 1.2084 3.4629 3.4629 0 0 0 -.8779 2.1585 1.419 1.419 0 0 0 .031.2892 1.19 1.19 0 0 0 .2169.0207 3.0935 3.0935 0 0 0 2.1586-1.1368z" />
-            </svg>
-          </Link>
+        <div className="h-12 px-6">
+          <div className="hidden md:flex items-center h-full justify-between" style={{ margin: "0 -8px" }}>
+            {/* Apple logo */}
+            <Link href="/" className="text-neutral-900 hover:text-neutral-500 transition-colors flex items-center h-full px-2">
+              <svg width="14" height="44" viewBox="0 0 14 44" fill="currentColor">
+                <path d="m13.0729 17.6825a3.61 3.61 0 0 0 -1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1 -1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1 -1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.6919 2.5924.6919.63 0 1.6112-.7333 2.8092-.7333a3.7579 3.7579 0 0 1 3.1604 1.5802zm-3.7284-2.8918a3.5615 3.5615 0 0 0 .8469-2.22 1.5353 1.5353 0 0 0 -.031-.32 3.5686 3.5686 0 0 0 -2.3445 1.2084 3.4629 3.4629 0 0 0 -.8779 2.1585 1.419 1.419 0 0 0 .031.2892 1.19 1.19 0 0 0 .2169.0207 3.0935 3.0935 0 0 0 2.1586-1.1368z" />
+              </svg>
+            </Link>
 
-          {/* Desktop nav links — actual clickable links */}
-          <div className="hidden md:flex items-center">
-            {navData.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onMouseEnter={() => handleNavEnter(item.label)}
-                onMouseLeave={handleNavLeave}
-                className={`text-xs transition-colors no-underline px-[12px] ${
-                  activeDropdown === item.label
-                    ? "text-black"
-                    : "text-neutral-600 hover:text-neutral-900"
-                }`}
+            {/* Desktop nav links — evenly distributed */}
+            <div className="flex items-center h-full">
+              {navData.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onMouseEnter={() => handleNavEnter(item.label)}
+                  onMouseLeave={handleNavLeave}
+                  className={`h-full flex items-center text-xs transition-colors no-underline px-2 ${
+                    activeDropdown === item.label
+                      ? "text-black"
+                      : "text-neutral-600 hover:text-neutral-900"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Right icons */}
+            <div className="flex items-center h-full">
+              <button className="h-full flex items-center px-2 text-neutral-600 hover:text-neutral-900 transition-colors">
+                <Search size={16} strokeWidth={1.5} />
+              </button>
+              <button className="h-full flex items-center px-2 text-neutral-600 hover:text-neutral-900 transition-colors">
+                <ShoppingBag size={16} strokeWidth={1.5} />
+              </button>
+              <button
+                className="md:hidden h-full flex items-center px-2 text-neutral-600 hover:text-neutral-900 transition-colors"
+                onClick={() => setMobileOpen(!mobileOpen)}
               >
-                {item.label}
-              </Link>
-            ))}
+                {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
+            </div>
           </div>
 
-          {/* Right icons */}
-          <div className="flex items-center gap-5">
-            <button className="text-neutral-600 hover:text-neutral-900 transition-colors">
-              <Search size={16} strokeWidth={1.5} />
-            </button>
-            <button className="text-neutral-600 hover:text-neutral-900 transition-colors">
-              <ShoppingBag size={16} strokeWidth={1.5} />
-            </button>
-            <button
-              className="md:hidden text-neutral-600 hover:text-neutral-900 transition-colors"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
+          {/* Mobile nav */}
+          <div className="md:hidden flex items-center justify-between h-full">
+            <Link href="/" className="text-neutral-900 hover:text-neutral-500 transition-colors">
+              <svg width="14" height="44" viewBox="0 0 14 44" fill="currentColor">
+                <path d="m13.0729 17.6825a3.61 3.61 0 0 0 -1.7248 3.0365 3.5132 3.5132 0 0 0 2.1379 3.2223 8.394 8.394 0 0 1 -1.0948 2.2618c-.6816.9812-1.3943 1.9623-2.4787 1.9623s-1.3633-.63-2.613-.63c-1.2187 0-1.6525.6507-2.644.6507s-1.6834-.9089-2.4787-2.0243a9.7842 9.7842 0 0 1 -1.6628-5.2776c0-3.0984 2.014-4.7405 3.9969-4.7405 1.0535 0 1.9314.6919 2.5924.6919.63 0 1.6112-.7333 2.8092-.7333a3.7579 3.7579 0 0 1 3.1604 1.5802zm-3.7284-2.8918a3.5615 3.5615 0 0 0 .8469-2.22 1.5353 1.5353 0 0 0 -.031-.32 3.5686 3.5686 0 0 0 -2.3445 1.2084 3.4629 3.4629 0 0 0 -.8779 2.1585 1.419 1.419 0 0 0 .031.2892 1.19 1.19 0 0 0 .2169.0207 3.0935 3.0935 0 0 0 2.1586-1.1368z" />
+              </svg>
+            </Link>
+            <div className="flex items-center gap-4">
+              <button className="text-neutral-600 hover:text-neutral-900 transition-colors">
+                <Search size={16} strokeWidth={1.5} />
+              </button>
+              <button className="text-neutral-600 hover:text-neutral-900 transition-colors">
+                <ShoppingBag size={16} strokeWidth={1.5} />
+              </button>
+              <button
+                className="text-neutral-600 hover:text-neutral-900 transition-colors"
+                onClick={() => setMobileOpen(!mobileOpen)}
+              >
+                {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
