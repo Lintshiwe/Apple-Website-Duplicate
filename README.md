@@ -1,8 +1,8 @@
 <div align="center">
 
-#   Apple South Africa — Clone
+#   Apple South Africa — Website Recreation
 
-### *A pixel-perfect recreation of [apple.com/za](https://www.apple.com/za/) built with Next.js*
+### *A modern recreation of [apple.com/za](https://www.apple.com/za/) built with Next.js*
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript&logoColor=white)
@@ -25,7 +25,7 @@
 
 > **This is an unofficial fan project and is NOT affiliated with, endorsed by, or connected to Apple Inc. in any way.**
 >
-> This repository was created **solely for educational and portfolio purposes**. It is a front-end clone of the Apple South Africa website (`apple.com/za`). All product names, logos, trademarks, and registered trademarks are the property of their respective owners — including **Apple Inc.**
+> This repository was created **solely for educational and portfolio purposes**. It is a front-end recreation of the Apple South Africa website (`apple.com/za`). All product names, logos, trademarks, and registered trademarks are the property of their respective owners — including **Apple Inc.**
 >
 > - No copyright infringement is intended.
 > - No Apple assets are redistributed for commercial use.
