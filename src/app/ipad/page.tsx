@@ -90,7 +90,7 @@ export default function IpadPage() {
 
         {/* Product Grid */}
         <section className="bg-neutral-100 py-3">
-          <ScrollReveal className="max-w-[980px] mx-auto px-3" stagger>
+          <ScrollReveal className="px-6 md:px-12" stagger>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {ipadProducts.map((product) => (
                 <div
@@ -110,7 +110,7 @@ export default function IpadPage() {
                         src={product.imageSrc}
                         alt={product.name}
                         fill
-                        className="!relative object-contain group-hover:scale-105 transition-transform duration-500"
+                        className="object-contain group-hover:scale-[1.02] transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (
@@ -146,7 +146,7 @@ export default function IpadPage() {
 
         {/* Get to know iPad */}
         <section className="bg-white py-16 md:py-24">
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-center text-neutral-900 mb-12">
               Get to know iPad.
             </h2>
@@ -160,7 +160,7 @@ export default function IpadPage() {
                     src={feature.image}
                     alt={feature.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     sizes="288px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -176,14 +176,14 @@ export default function IpadPage() {
 
         {/* Ecosystem */}
         <section className="bg-neutral-100 py-16 md:py-24">
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-center text-neutral-900 mb-12">
               Significant others.
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {ecosystem.map((item) => (
                 <div key={item.title} className="bg-white rounded-2xl overflow-hidden">
-                  <div className="relative h-48">
+                  <div className="relative aspect-video">
                     <Image
                       src={item.image}
                       alt={item.title}

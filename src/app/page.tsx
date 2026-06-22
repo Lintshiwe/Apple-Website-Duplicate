@@ -50,6 +50,7 @@ export default function Home() {
           ctaLinks={[{ text: "Learn more", href: "/iphone" }]}
           imageSrc="/images/iphone-17-pro-hero.jpg"
           imagePriority
+          parallax
         />
 
         {/* Hero: MacBook Neo */}
@@ -59,6 +60,8 @@ export default function Home() {
           bgColor="bg-white"
           ctaLinks={[{ text: "Learn more", href: "/mac" }]}
           imageSrc="/images/macbook-neo-welcome.jpg"
+          imagePosition="center"
+          parallax
         />
 
         {/* Hero: iPad Air */}
@@ -70,11 +73,12 @@ export default function Home() {
           imageSrc="/images/hero-ipad-air-m4-2x.jpg"
           logoSrc="/images/logo-ipad-air-m4.png"
           logoAlt="iPad Air"
+          parallax
         />
 
         {/* Promo Cards — 2x2 grid matching apple.com/za */}
         <section className="bg-[#f5f5f7] w-full">
-          <ScrollReveal className="max-w-[980px] mx-auto px-4 py-3" stagger>
+          <ScrollReveal className="px-4 py-3" stagger>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {promoCards.map((card) => (
                 <Link
@@ -87,7 +91,7 @@ export default function Home() {
                       src={card.imageSrc}
                       alt={card.name}
                       fill
-                      className="!relative object-contain group-hover:scale-[1.03] transition-transform duration-500"
+                      className="object-contain group-hover:scale-[1.02] transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>

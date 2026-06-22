@@ -72,7 +72,7 @@ export default function WatchPage() {
 
         {/* Product Grid */}
         <section className="bg-neutral-100 py-3">
-          <ScrollReveal className="max-w-[980px] mx-auto px-3" stagger>
+          <ScrollReveal className="px-6 md:px-12" stagger>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {watchProducts.map((product) => (
                 <div
@@ -87,7 +87,7 @@ export default function WatchPage() {
                         src={product.imageSrc}
                         alt={product.name}
                         fill
-                        className="!relative object-contain group-hover:scale-105 transition-transform duration-500"
+                        className="object-contain group-hover:scale-[1.02] transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     ) : (
@@ -123,7 +123,7 @@ export default function WatchPage() {
 
         {/* Get to know Apple Watch */}
         <section className="bg-white py-16 md:py-24">
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-center text-neutral-900 mb-12">
               Get to know Apple Watch.
             </h2>
@@ -137,7 +137,7 @@ export default function WatchPage() {
                     src={feature.image}
                     alt={feature.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                     sizes="288px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -153,19 +153,19 @@ export default function WatchPage() {
 
         {/* Ecosystem */}
         <section className="bg-neutral-100 py-16 md:py-24">
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-center text-neutral-900 mb-12">
               Made for each other.
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {ecosystem.map((item) => (
                 <div key={item.title} className="bg-white rounded-2xl overflow-hidden">
-                  <div className="relative h-48">
+                  <div className="relative aspect-video bg-neutral-100">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
-                      className="object-cover"
+                      className="object-contain p-4"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </div>

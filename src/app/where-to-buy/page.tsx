@@ -327,7 +327,7 @@ export default function WhereToBuyPage() {
 
         {/* Apple-style pill tab navigation with icons */}
         <section className="bg-white border-b border-neutral-200 sticky top-11 z-30">
-          <div className="max-w-[980px] mx-auto px-6 py-4">
+          <div className="px-6 md:px-12 py-4">
             <nav className="flex justify-center" aria-label="Product categories">
               {/* Pill container */}
               <div className="inline-flex items-center gap-1 bg-neutral-100 rounded-full p-1">
@@ -370,7 +370,7 @@ export default function WhereToBuyPage() {
           ref={setSectionRef("mac")}
           className="bg-white py-16 md:py-24 scroll-mt-28"
         >
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-2">
               Mac availability in South Africa
             </h2>
@@ -388,7 +388,7 @@ export default function WhereToBuyPage() {
           ref={setSectionRef("ipad")}
           className="bg-neutral-100 py-16 md:py-24 scroll-mt-28"
         >
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-2">
               iPad availability in South Africa
             </h2>
@@ -406,7 +406,7 @@ export default function WhereToBuyPage() {
           ref={setSectionRef("iphone")}
           className="bg-white py-16 md:py-24 scroll-mt-28"
         >
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-2">
               iPhone availability in South Africa
             </h2>
@@ -424,7 +424,7 @@ export default function WhereToBuyPage() {
           ref={setSectionRef("watch")}
           className="bg-neutral-100 py-16 md:py-24 scroll-mt-28"
         >
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-2">
               Apple Watch availability in South Africa
             </h2>
@@ -437,7 +437,7 @@ export default function WhereToBuyPage() {
 
         {/* Disclaimer */}
         <section className="bg-white py-4">
-          <div className="max-w-[980px] mx-auto px-6">
+          <div className="px-6 md:px-12">
             <p className="text-sm text-neutral-500">
               Products may not be available in all areas. Check with local resellers for availability.
             </p>
@@ -446,7 +446,7 @@ export default function WhereToBuyPage() {
 
         {/* Find a Reseller */}
         <section className="bg-white py-16 md:py-24">
-          <ScrollReveal className="max-w-[980px] mx-auto px-6 text-center">
+          <ScrollReveal className="px-6 md:px-12 text-center">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-4">
               Apple resellers in South Africa
             </h2>

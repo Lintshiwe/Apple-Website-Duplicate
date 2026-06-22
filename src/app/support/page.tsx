@@ -72,7 +72,7 @@ export default function SupportPage() {
         {/* Product Category Grid — 4 columns matching original */}
         <section className="bg-white py-10 md:py-14">
           <ScrollReveal>
-            <div className="max-w-[980px] mx-auto px-6">
+            <div className="px-6 md:px-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {productCategories.map((cat) => (
                   <Link
@@ -99,7 +99,7 @@ export default function SupportPage() {
 
         {/* Quick Links — Rounded gray tiles with SVG icons */}
         <section className="bg-white pb-10 md:pb-14">
-          <div className="max-w-[980px] mx-auto px-6">
+          <div className="px-6 md:px-12">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {quickLinks.map((link) => (
                 <Link
@@ -125,7 +125,7 @@ export default function SupportPage() {
 
         {/* Search for More Topics */}
         <section className="bg-white py-8">
-          <div className="max-w-[980px] mx-auto px-6">
+          <div className="px-6 md:px-12">
             <h2 className="text-2xl md:text-3xl font-semibold text-center text-neutral-900 mb-8">
               Search for More Topics
             </h2>
@@ -135,7 +135,7 @@ export default function SupportPage() {
         {/* Apple Support App — Full-width promo banner */}
         <section className="bg-white pb-10 md:pb-14">
           <ScrollReveal>
-            <div className="max-w-[980px] mx-auto px-6">
+            <div className="px-6 md:px-12">
               <Link href="#" className="block rounded-2xl overflow-hidden hover:opacity-95 transition-opacity">
                 <Image
                   src="/images/support-app-banner.png"
@@ -151,7 +151,7 @@ export default function SupportPage() {
 
         {/* Beware of Counterfeit Parts */}
         <section className="bg-white py-10 md:py-14">
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-6">
               Beware of counterfeit parts
             </h2>
@@ -179,7 +179,7 @@ export default function SupportPage() {
 
         {/* Apple Service Programmes */}
         <section className="bg-white py-10 md:py-14">
-          <ScrollReveal className="max-w-[980px] mx-auto px-6">
+          <ScrollReveal className="px-6 md:px-12">
             <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900 mb-8">
               Apple Service Programmes
             </h2>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect, useCallback } from "react";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,6 +23,8 @@ interface HeroBannerProps {
   imageSrc?: string;
   imageAlt?: string;
   imagePriority?: boolean;
+  imagePosition?: "top" | "center";
+  parallax?: boolean;
   logoSrc?: string;
   logoAlt?: string;
 }
@@ -38,9 +41,38 @@ export default function HeroBanner({
   imageSrc,
   imageAlt,
   imagePriority = false,
+  imagePosition = "top",
+  parallax = false,
   logoSrc,
   logoAlt,
 }: HeroBannerProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = useCallback(() => {
+    if (!containerRef.current || !imageRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const containerCenter = rect.top + rect.height / 2;
+    const viewportCenter = windowHeight / 2;
+    const offset = (containerCenter - viewportCenter) * 0.15;
+    imageRef.current.style.transform = `translateY(${offset}px)`;
+  }, []);
+
+  useEffect(() => {
+    if (!parallax) return;
+    let rafId: number;
+    const onScroll = () => {
+      rafId = requestAnimationFrame(handleScroll);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, [parallax, handleScroll]);
+
   return (
     <section id={id} className={`w-full ${bgColor} ${textColor} ${className}`}>
       <ScrollReveal className="flex flex-col items-center text-center">
@@ -81,15 +113,21 @@ export default function HeroBanner({
           </div>
         )}
         {imageSrc && (
-          <div className="w-full pb-0 -mb-px relative">
-            <Image
-              src={imageSrc}
-              alt={imageAlt || title}
-              fill
-              className="!relative object-cover"
-              sizes="100vw"
-              priority={imagePriority}
-            />
+          <div ref={containerRef} className="w-full relative h-[450px] md:h-[550px] lg:h-[700px] overflow-hidden">
+            <div
+              ref={imageRef}
+              className="absolute inset-0"
+              style={parallax ? { willChange: "transform" } : undefined}
+            >
+              <Image
+                src={imageSrc}
+                alt={imageAlt || title}
+                fill
+                className={`object-cover ${imagePosition === "center" ? "object-center" : "object-top"}`}
+                sizes="100vw"
+                priority={imagePriority}
+              />
+            </div>
           </div>
         )}
       </ScrollReveal>
