@@ -1,6 +1,6 @@
 <div align="center">
 
-#   Apple South Africa — Website Recreation
+#   Apple South Africa Website Recreation
 
 ### *A modern recreation of [apple.com/za](https://www.apple.com/za/) built with Next.js*
 
